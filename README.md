@@ -1,24 +1,15 @@
-# energy-n14-e13-mtt-back-check
+<!--
+ * @Author      : Mr.bin
+ * @Date        : 2023-06-16 21:08:17
+ * @LastEditTime: 2023-06-16 21:49:29
+ * @Description : energy-n14-e13-mtt-back-check
+-->
 
-## Project setup
-```
-npm install
-```
+# 全身等长肌力测试训练系统-MTT 版
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 基本设备信息
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- 左 K 值：82.243
+- 右 K 值：82.243
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- 传感器量程：0~200kg
