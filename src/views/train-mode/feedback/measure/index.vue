@@ -1,7 +1,7 @@
 <!--
  * @Author      : Mr.bin
  * @Date        : 2023-06-19 16:15:01
- * @LastEditTime: 2023-06-19 17:27:42
+ * @LastEditTime: 2023-06-19 22:29:59
  * @Description : 反馈训练-具体测量
 -->
 <template>
