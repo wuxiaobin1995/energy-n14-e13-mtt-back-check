@@ -1,7 +1,7 @@
 <!--
  * @Author      : Mr.bin
  * @Date        : 2023-06-19 15:36:10
- * @LastEditTime: 2023-06-19 15:37:37
+ * @LastEditTime: 2023-06-20 11:01:23
  * @Description : 评估数据统一发送页面
 -->
 <template>
@@ -64,7 +64,7 @@ export default {
      */
     sendData() {
       const mttIP = window.localStorage.getItem('mttIP')
-      // const api = `http://${mttIP}/energy_t6_m5_mtt/public/index.php/imsItemList/sendImsItemListAssessData`
+      const api = `http://${mttIP}/energy_t6_m5_mtt/public/index.php/imsItemList/sendImsItemListAssessData`
       console.log(api)
 
       this.fullscreenLoading = true

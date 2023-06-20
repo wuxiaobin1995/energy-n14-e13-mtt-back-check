@@ -76,7 +76,7 @@ export default {
      */
     handleTest() {
       this.$router.push({
-        path: '/test-measure',
+        path: '/body-muscle-measure',
         query: {
           testName: JSON.stringify('cvRearProtraction'),
           chineseName: JSON.stringify('颈椎后伸')

@@ -1,7 +1,7 @@
 <!--
  * @Author      : Mr.bin
  * @Date        : 2023-06-19 15:38:59
- * @LastEditTime: 2023-06-19 15:44:27
+ * @LastEditTime: 2023-06-20 11:10:46
  * @Description : 训练数据统一发送页面
 -->
 <template>
@@ -64,7 +64,7 @@ export default {
      */
     sendData() {
       const mttIP = window.localStorage.getItem('mttIP')
-      // const api = `http://${mttIP}/energy_t6_m5_mtt/public/index.php/imsItemList/sendImsItemListTrainData`
+      const api = `http://${mttIP}/energy_t6_m5_mtt/public/index.php/imsItemList/sendImsItemListTrainData`
       console.log(api)
 
       this.fullscreenLoading = true
