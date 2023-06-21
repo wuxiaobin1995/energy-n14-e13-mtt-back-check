@@ -1,7 +1,7 @@
 <!--
  * @Author      : Mr.bin
  * @Date        : 2023-06-19 17:35:53
- * @LastEditTime: 2023-06-19 17:36:12
+ * @LastEditTime: 2023-06-20 21:37:57
  * @Description : 肌耐力训练-具体测量
 -->
 <template>
@@ -109,6 +109,7 @@ export default {
       /* 控制类 */
       isStart: false, // 是否开始
       scShow: true, // 是否继续
+      dialogVisible: false, // 休息倒计时弹窗
 
       /* 其他 */
       oneK: 0, // P1的K
@@ -151,7 +152,7 @@ export default {
       nowFrequency: 0, // 实时的次数（递增）
       groupCount: this.$store.state.settings[0].groupCount, // 组数
       nowGroupCount: this.$store.state.settings[0].groupCount, // 实时的次数（递减）
-      timeClock: null, // 计时器
+      restTimeClock: null, // 休息计时器
       intervalTime: this.$store.state.settings[0].intervalTime, // 组间休息时长
       nowIntervalTime: this.$store.state.settings[0].intervalTime, // 实时的组间休息时长
       target: this.$store.state.settings[0].target, // 训练目标
@@ -159,8 +160,6 @@ export default {
       keepdRate: this.$store.state.settings[0].keepdRate, // 等长比
       offcenterRate: this.$store.state.settings[0].offcenterRate, // 离心比
       trainName: this.$store.state.settings[0].trainName, // 训练部位，格式如'cvRearProtraction-颈椎后伸'
-
-      dialogVisible: false, // 休息倒计时弹窗
 
       completion: null, // 完成度%
 
@@ -183,9 +182,9 @@ export default {
     this.initChart()
   },
   beforeDestroy() {
-    // 清除计时器
-    if (this.timeClock) {
-      clearInterval(this.timeClock)
+    // 清除休息计时器
+    if (this.restTimeClock) {
+      clearInterval(this.restTimeClock)
     }
     // 关闭串口
     if (this.usbPort) {
@@ -344,7 +343,7 @@ export default {
                       if (this.nowGroupCount > 0) {
                         this.nowIntervalTime = this.intervalTime
                         this.dialogVisible = true
-                        this.timeClock = setInterval(() => {
+                        this.restTimeClock = setInterval(() => {
                           this.nowIntervalTime -= 1
                           if (this.nowIntervalTime === 0) {
                             this.handlePass()
@@ -498,9 +497,9 @@ export default {
      * @description: 休息结束函数
      */
     handlePass() {
-      /* 清除定时器 */
-      if (this.timeClock) {
-        clearInterval(this.timeClock)
+      /* 清除休息计时器 */
+      if (this.restTimeClock) {
+        clearInterval(this.restTimeClock)
       }
       this.nowFrequency = 0
       this.dialogVisible = false
@@ -518,9 +517,9 @@ export default {
         }
       }
 
-      /* 清除定时器 */
-      if (this.timeClock) {
-        clearInterval(this.timeClock)
+      /* 清除休息计时器 */
+      if (this.restTimeClock) {
+        clearInterval(this.restTimeClock)
       }
 
       /* 计算完成度 */
