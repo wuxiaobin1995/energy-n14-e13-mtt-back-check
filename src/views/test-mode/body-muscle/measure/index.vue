@@ -1,7 +1,7 @@
 <!--
  * @Author      : Mr.bin
  * @Date        : 2023-06-19 10:34:54
- * @LastEditTime: 2023-06-19 15:41:12
+ * @LastEditTime: 2023-06-30 17:38:54
  * @Description : 全身肌力测试-具体测量
 -->
 <template>
@@ -81,6 +81,13 @@
 /* 串口通信库 */
 import SerialPort from 'serialport'
 import Readline from '@serialport/parser-readline'
+
+import {
+  calculateRecommend,
+  calculateMuscleRate,
+  calculateScore,
+  calculateClassification
+} from '../utils/index.js'
 
 export default {
   name: 'body-muscle-measure',
@@ -508,10 +515,38 @@ export default {
                     this.$store.state.currentUserInfo.birthday,
                     'years'
                   )
+                  // 计算推荐值
+                  const calculateRecommendArguments = {
+                    sex: this.$store.state.currentUserInfo.sex,
+                    weight: this.$store.state.currentUserInfo.weight,
+                    height: this.$store.state.currentUserInfo.height,
+                    currentAge: currentAge
+                  }
+                  const calculateRecommendResult = calculateRecommend(
+                    calculateRecommendArguments
+                  )
+                  // 计算测量肌力比
+                  const calculateMuscleRateResult = calculateMuscleRate(
+                    this.$store.state.resultValue
+                  )
+                  // 计算得分
+                  const calculateScoreResult = calculateScore(
+                    { sex: this.$store.state.currentUserInfo.sex },
+                    this.$store.state.resultValue,
+                    calculateRecommendResult
+                  )
+                  // 计算分级评价
+                  const calculateClassificationResult =
+                    calculateClassification(calculateScoreResult)
+
                   const obj = {
                     pattern: '全身肌力测试',
                     currentAge: currentAge, // 完成该次测试时的岁数
-                    result: this.$store.state.resultValue // 测试结果
+                    result: this.$store.state.resultValue, // 测试结果
+                    calculateRecommendResult: calculateRecommendResult, // 推荐值对象
+                    calculateMuscleRateResult: calculateMuscleRateResult, // 测量肌力比对象
+                    calculateScoreResult: calculateScoreResult, // 得分对象
+                    calculateClassificationResult: calculateClassificationResult // 分级评价对象
                   }
 
                   /* 暂存至 sessionStorage */
